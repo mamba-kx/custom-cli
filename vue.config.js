@@ -1,7 +1,8 @@
+const { defineConfig } = require("@vue/cli-service");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 const CDN_URL = "https://xxx.file.com/";
 
-module.exports = {
+module.exports = defineConfig({
   publicPath: process.env.VUE_APP_ENV === "prod" ? CDN_URL : "/",
   productionSourceMap: false,
   lintOnSave: false,
@@ -48,4 +49,4 @@ module.exports = {
         .end();
     }
   }
-};
+});

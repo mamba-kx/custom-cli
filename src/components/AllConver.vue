@@ -39,92 +39,19 @@
   </van-tabs>
 </template>
 
-<script>
-import { reactive, toRefs, defineAsyncComponent } from 'vue';
+<script lang="ts">
+import { reactive, toRefs, defineAsyncComponent, defineComponent } from 'vue';
+import { iCanConver } from '@/mock/index';
 import { Toast } from 'vant';
-const AllTickets = defineAsyncComponent(() =>
-  import('@/components/AllTickets.vue')
+const AllTickets = defineAsyncComponent(
+  () => import('@/components/AllTickets.vue')
 );
-import { wxTickets } from '../mock/wxTickets';
-
-export default {
+export default defineComponent({
   components: { AllTickets },
   setup() {
     let data = reactive({
       active: 0,
-      loading: false,
-      iCanConver: {
-        wxTickets,
-        jdeTickets: [
-          {
-            id: 1,
-            icon: require('@/assets/jdeTicket.jpeg'),
-            title: '京东e卡(50元)',
-            miliNum: '2000',
-            enough: 0,
-            mili: '5米粒',
-            price: '市场价 ¥ 0',
-            converted: '已兑 5 件',
-            productNotice: {
-              notice1: '温馨提示：使用微信立减券的订单若发生',
-              notice2:
-                '部分退款，按比例退还用户实际支付金额，剩余余额不支持退回，且微信立减券不支持退回微信卡包。',
-              notice3: '详见“使用须知”，请谨慎操作。'
-            }
-          },
-          {
-            id: 2,
-            icon: require('@/assets/jdeTickets.jpeg'),
-            title: '京东e卡(100元)',
-            miliNum: '2000',
-            enough: 1,
-            mili: '5米粒',
-            price: '市场价 ¥ 0',
-            converted: '已兑 5 件',
-            productNotice: {
-              notice1: '温馨提示：使用微信立减券的订单若发生',
-              notice2:
-                '部分退款，按比例退还用户实际支付金额，剩余余额不支持退回，且微信立减券不支持退回微信卡包。',
-              notice3: '详见“使用须知”，请谨慎操作。'
-            }
-          }
-        ],
-        oilTickets: [
-          {
-            id: 1,
-            icon: require('@/assets/oilTickets.jpeg'),
-            title: '中石油加油卡(100元)',
-            miliNum: '10000',
-            enough: 1,
-            mili: '5米粒',
-            price: '市场价 ¥ 0',
-            converted: '已兑 5 件',
-            productNotice: {
-              notice1: '温馨提示：使用微信立减券的订单若发生',
-              notice2:
-                '部分退款，按比例退还用户实际支付金额，剩余余额不支持退回，且微信立减券不支持退回微信卡包。',
-              notice3: '详见“使用须知”，请谨慎操作。'
-            }
-          },
-          {
-            id: 2,
-            icon: require('@/assets/oilTicket.jpeg'),
-            title: '中石化加油卡(200元)',
-            miliNum: '20000',
-            enough: 0,
-            mili: '5米粒',
-            price: '市场价 ¥ 0',
-            converted: '已兑 5 件',
-            productNotice: {
-              notice1: '温馨提示：使用微信立减券的订单若发生',
-              notice2:
-                '部分退款，按比例退还用户实际支付金额，剩余余额不支持退回，且微信立减券不支持退回微信卡包。',
-              notice3: '详见“使用须知”，请谨慎操作。'
-            }
-          }
-        ],
-        workShare: []
-      }
+      loading: false
     });
     const onRefresh = () => {
       setTimeout(() => {
@@ -132,9 +59,9 @@ export default {
         data.loading = false;
       });
     };
-    return { ...toRefs(data), onRefresh };
+    return { ...toRefs(data), onRefresh, iCanConver };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>

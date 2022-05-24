@@ -12,19 +12,18 @@
   </div>
 </template>
 
-<script>
-import { useRouter } from 'vue-router';
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+export default defineComponent({
   setup() {
-    const router = useRouter();
     const backHome = () => {
-      router.go('-1');
+      window.history.go(-1);
     };
     return {
       backHome
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>

@@ -21,7 +21,7 @@
     <p class="notice">获取的米粒将于派发日12点前入仓</p>
   </div>
   <div class="content">
-    <van-tabs v-model:active="active">
+    <van-tabs>
       <van-tab title="全部">
         <Suspense>
           <template v-slot:default>
@@ -54,115 +54,74 @@
   </ShadowVue>
 </template>
 
-<script>
-import HeaderVue from '@/components/Header.vue';
+<script lang="ts">
 import ShadowVue from '@/components/Shadow.vue';
+import HeaderVue from '@/components/Header.vue';
 import LoadingVue from '@/components/Loading.vue';
-import { ref, reactive, toRefs, defineAsyncComponent, computed } from 'vue';
-const PriceMili = defineAsyncComponent(() =>
-  import('@/components/PriceMili.vue')
+import { priceMiliDetail, myGranaryData } from '@/mock/index';
+import { IPriceMiliDetail } from '@/interface';
+import {
+  ref,
+  reactive,
+  defineAsyncComponent,
+  computed,
+  defineComponent,
+  toRefs
+} from 'vue';
+const PriceMili = defineAsyncComponent(
+  () => import('@/components/PriceMili.vue')
 );
-
-export default {
+export default defineComponent({
   components: { HeaderVue, ShadowVue, PriceMili, LoadingVue },
   setup() {
-    let active = ref(0);
     let isShowShadow = ref(false);
-    let data = reactive({
-      myGranaryData: {
-        miliNum: 0,
-        miliInput: 0,
-        miliOutput: 0
-      },
+    let detailMili: IPriceMiliDetail = {
+      input: [],
+      output: []
+    };
+    let data = reactive({ detailMili });
 
-      priceMiliDetail: {
-        input: [
-          {
-            id: 1,
-            title: '助力升级米粒奖励',
-            date: 1652256242461,
-            miliNum: '+62'
-          },
-          {
-            id: 2,
-            title: '创业升级米粒奖励',
-            date: 1652256222461,
-            miliNum: '+2'
-          },
-          {
-            id: 3,
-            title: '助力升级米粒奖励',
-            date: 1622256222461,
-            miliNum: '+2'
-          },
-          {
-            id: 4,
-            title: '创业升级米粒奖励',
-            date: 1646102562000,
-            miliNum: '+200'
-          }
-        ],
-        output: [
-          {
-            id: 1,
-            title: '积分兑换2元微信立减券',
-            date: 1624924562000,
-            miliNum: '-800'
-          },
-          {
-            id: 2,
-            title: '积分兑换京东e卡（5元）',
-            date: 1624934562000,
-            miliNum: '-2500'
-          },
-          {
-            id: 3,
-            title: '积分兑换2元微信立减券',
-            date: 1624931562000,
-            miliNum: '-200'
-          },
-          {
-            id: 2,
-            title: '积分兑换2元微信立减券',
-            date: 1624934862000,
-            miliNum: '-200'
-          }
-        ]
-      }
-    });
+    setTimeout(() => {
+      data.detailMili = priceMiliDetail;
+    }, 200);
 
+    // 全部
     let allPriceMiliDetail = computed(() => {
-      const { input, output } = data.priceMiliDetail;
+      const { input, output } = priceMiliDetail;
       return input.concat(output).sort((a, b) => {
         return a.date - b.date;
       });
     });
+
+    // 入仓
     let inputMili = computed(() => {
-      const { input } = data.priceMiliDetail;
+      const { input } = priceMiliDetail;
       return input.sort((a, b) => {
         return a.date - b.date;
       });
     });
+
+    // 出仓
     let outputMili = computed(() => {
-      const { output } = data.priceMiliDetail;
+      const { output } = priceMiliDetail;
       return output.sort((a, b) => {
         return a.date - b.date;
       });
     });
+
     // 显示米粒失效规则
     const showRule = () => {
-      isShowShadow = true;
-      console.log(isShowShadow);
+      isShowShadow.value = true;
     };
 
     // 关闭米粒失效规则
     const hiddenRule = () => {
-      isShowShadow = false;
+      isShowShadow.value = false;
     };
     return {
-      active,
-      isShowShadow,
       ...toRefs(data),
+      isShowShadow,
+      myGranaryData,
       showRule,
       hiddenRule,
       allPriceMiliDetail,
@@ -170,7 +129,7 @@ export default {
       outputMili
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>
@@ -231,7 +190,7 @@ export default {
   top: 395px;
 }
 
-::v-deep .van-tabs__wrap{
+::v-deep .van-tabs__wrap {
   position: fixed;
   height: 60px;
   width: 100vw;

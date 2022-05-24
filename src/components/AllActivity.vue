@@ -1,41 +1,29 @@
 <template>
   <ul class="bannerList">
-    <li v-for="item in hotActivitiesData" :key="item.id">
+    <li v-for="item in hotActivitiesData" :key="item.name">
       <img class="banner" :src="item.icon" @click="skipToH5(item)" alt="" />
       <p class="activityName">{{ item.name }}</p>
     </li>
   </ul>
 </template>
 
-<script>
-import { reactive, toRefs } from 'vue';
-export default {
+<script lang="ts">
+import { defineComponent } from 'vue';
+import { hotActivitiesData } from '@/mock';
+
+export default defineComponent({
   components: {},
   setup() {
-    let data = reactive({
-      hotActivitiesData: [
-        {
-          icon: require('@/assets/newPeopleBanner.png'),
-          name: '新人米粒大派送',
-          url: 'https://zgcbma.zgcbank.com/zgctwo/#/'
-        },
-        {
-          icon: require('@/assets/callFriendBanner.png'),
-          name: '呼朋唤友赢好礼',
-          url: 'https://zgcbma.zgcbank.com/zgcthree/#/'
-        }
-      ]
-    });
-
-    const skipToH5 = item => {
+    const skipToH5 = (item: any): void => {
       window.location.href = item.url;
     };
+
     return {
-      ...toRefs(data),
+      hotActivitiesData,
       skipToH5
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>

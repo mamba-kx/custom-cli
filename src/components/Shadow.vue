@@ -6,9 +6,9 @@
   </van-overlay>
 </template>
 
-<script>
-import { ref, } from 'vue';
-export default {
+<script lang="ts">
+import { ref,defineComponent } from 'vue';
+export default defineComponent({
   components: {},
   props: {
     isShow: Boolean
@@ -21,7 +21,7 @@ export default {
       isShow
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>

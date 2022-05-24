@@ -10,7 +10,7 @@
         >
           我能兑换
         </span>
-        <span class="all" @click="all">全部</span>
+        <span class="all">全部</span>
       </div>
     </div>
     <van-divider />
@@ -25,26 +25,23 @@
   </div>
 </template>
 
-<script>
-import { reactive, defineAsyncComponent, toRefs } from 'vue';
+<script lang="ts">
+import { ref, defineAsyncComponent, defineComponent } from 'vue';
 import HeaderVue from '@/components/Header.vue';
-const AllConver = defineAsyncComponent(() =>
-  import('@/components/AllConver.vue')
+const AllConver = defineAsyncComponent(
+  () => import('@/components/AllConver.vue')
 );
 
-export default {
+export default defineComponent({
   components: { HeaderVue, AllConver },
   setup() {
-    let data = reactive({
-      isSelected: false
-    });
+    const isSelected = ref(false);
     const iCanConvert = () => {
-      data.isSelected = true;
-      console.log(data);
+      isSelected.value = true;
     };
-    return { ...toRefs(data), iCanConvert };
+    return { isSelected, iCanConvert };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>
@@ -52,6 +49,8 @@ export default {
   width: $width;
   height: 100vh;
   margin: 0 auto;
+  position: relative;
+  top: $height;
   .tab {
     .tabBox {
       margin: 20px 0;

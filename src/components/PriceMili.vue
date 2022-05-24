@@ -12,10 +12,10 @@
   </ul>
 </template>
 
-<script>
+<script lang="ts">
 import useChangeTime from '@/hooks/useTimeChange';
-import { reactive, toRefs } from 'vue';
-export default {
+import { defineComponent } from 'vue';
+export default defineComponent({
   components: {},
   props: {
     priceMiliDetail: {
@@ -29,7 +29,7 @@ export default {
       useChangeTime
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>
@@ -55,7 +55,7 @@ export default {
       color: orange;
       font-weight: 600;
     }
-    .outMiliColor{
+    .outMiliColor {
       color: #948d8d;
     }
   }

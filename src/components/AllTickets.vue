@@ -17,10 +17,10 @@
   <div class="noProduct" v-else>该分类下暂无可兑换商品</div>
 </template>
 
-<script>
-import { reactive, toRefs,toRaw } from 'vue';
+<script lang="ts">
+import { reactive, toRefs, toRaw, defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
-export default {
+export default defineComponent({
   components: {},
   props: ['tickets'],
   setup() {
@@ -28,16 +28,16 @@ export default {
       loading: false
     });
     const router = useRouter();
-    const skipToProductDetail = item => {
-      let data = JSON.stringify(toRaw(item))
-      router.push({ name: 'productsExchange', params: {data}});
+    const skipToProductDetail = (item: any) => {
+      let data = JSON.stringify(toRaw(item));
+      router.push({ name: 'productsExchange', params: { data } });
     };
     return {
       ...toRefs(data),
       skipToProductDetail
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>

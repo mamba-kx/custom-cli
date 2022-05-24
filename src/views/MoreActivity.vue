@@ -14,15 +14,15 @@
   </div>
 </template>
 
-<script>
-import { defineAsyncComponent } from 'vue';
+<script lang="ts">
+import { defineAsyncComponent,defineComponent } from 'vue';
 import { useRouter } from 'vue-router';
 const Header = defineAsyncComponent(() => import('@/components/Header.vue'));
 const AllActivity = defineAsyncComponent(() =>
   import('@/components/AllActivity.vue')
 );
 
-export default {
+export default defineComponent({
   components: { AllActivity, Header },
   setup() {
     const router = useRouter();
@@ -33,7 +33,7 @@ export default {
       backHome
     };
   }
-};
+});
 </script>
 
 <style lang='scss' scoped>
