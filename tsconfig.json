@@ -1,0 +1,20 @@
+{
+  "include": ["./src/**/*"],
+  "exclude": ["./src/utils/*"],
+  "compilerOptions": {
+    "target": "es2015",
+    "module": "es2015",
+    "lib": ["es6", "dom"],
+    "outDir": "./dist",
+    "allowJs": true,
+    "checkJs": true,
+    "removeComments": false,
+    "noEmit": false,
+    "noEmitOnError": true,
+    "alwaysStrict": true,
+    "noImplicitAny": true,
+    "noImplicitThis": true,
+    "strictNullChecks": true,
+    "typeRoots": ["node_modules/@types", "global.d.ts"]
+  }
+}
