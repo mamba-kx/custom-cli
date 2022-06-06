@@ -41,16 +41,16 @@ const selectFeatures = (features: string) => {
       // console.log("templateName", templateName);
       // console.log("projectName", projectName);
       // console.log("templates", templates);
-      // downloadFunc(
-      //   templates[templateName as keyof typeof templates].downloadUrl,
-      //   projectName
-      // ).then(() => {
-      // 下载模板后输入模板信息
-      inputProjectInfo();
-      // });
+      downloadFunc(
+        templates[templateName].downloadUrl,
+        projectName
+      ).then(() => {
+        // 下载模板后输入模板信息
+        inputProjectInfo();
+      });
     })
     .catch((err: any) => {
-      console.log("selectFeaturesErr", err);
+      console.error("selectFeaturesErr", err);
     });
 };
 
@@ -67,7 +67,7 @@ export const inquirerFunc = (customProjectName: string) => {
       selectTemplate(answer.preset);
     })
     .catch((err: any) => {
-      console.log("inquirerFuncErr", err);
+      console.error("inquirerFuncErr", err);
     });
 };
 
@@ -81,6 +81,6 @@ export const inputProjectInfo = () => {
       modifyPackageJson(projectName, res);
     })
     .catch((err: any) => {
-      console.log("inputProjectInfoErr", err);
+      console.error("inputProjectInfoErr", err);
     });
 };

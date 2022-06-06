@@ -3,7 +3,7 @@ const fs = require("fs");
 const handlebars = require("handlebars");
 
 // 修改package.json文件
-const modifyPackageJson = (projectName, answers) => {
+export const modifyPackageJson = (projectName: string, answers: Object) => {
   const packagePath = `${projectName}/package.json`;
   // 读取文件
   const packageContent = fs.readFileSync(packagePath, "utf8");

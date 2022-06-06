@@ -1,24 +1,24 @@
 import { templates } from "../config/index";
 import { inquirerFunc } from "./inquirer";
-
+import { cliHelp } from "./chalk";
 const commander = require("commander");
-const chalk = require("chalk");
+
+// 模板列表信息
+const templateList = () => {
+  console.table(templates);
+};
 
 export const commanderFunc = () => {
   // version
   commander.version("1.0.0");
 
   // list
-  // commander
-  //   .command("list")
-  //   .description("查看所有可用模板")
-  //   .action(() => {
-  //     for (let key in templates) {
-  //       console.log(`
-  //         ${key}   ${templates[key].description}
-  //     `);
-  //     }
-  //   });
+  commander
+    .command("list")
+    .description("查看所有可用模板")
+    .action(() => {
+      templateList();
+    });
 
   // create
   commander
@@ -32,11 +32,7 @@ export const commanderFunc = () => {
   commander.on("--help", function () {
     // 前后两个空行调整格式，更舒适
     console.log();
-    console.log(
-      `Run ${chalk.cyan(
-        "ckxcli <command> --help"
-      )} for detailed usage of given command`
-    );
+    console.log(cliHelp());
     console.log();
   });
 

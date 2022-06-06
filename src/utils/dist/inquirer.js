@@ -1,7 +1,9 @@
 "use strict";
 exports.__esModule = true;
 exports.inputProjectInfo = exports.inquirerFunc = void 0;
+var download_1 = require("./download");
 var index_1 = require("../config/index");
+var index_2 = require("../config/index");
 var fs_1 = require("./fs");
 var inquirer = require("inquirer");
 var projectName;
@@ -40,15 +42,12 @@ var selectFeatures = function (features) {
         // console.log("templateName", templateName);
         // console.log("projectName", projectName);
         // console.log("templates", templates);
-        // downloadFunc(
-        //   templates[templateName as keyof typeof templates].downloadUrl,
-        //   projectName
-        // ).then(() => {
-        // 下载模板后输入模板信息
-        exports.inputProjectInfo();
-        // });
+        download_1.downloadFunc(index_2.templates[templateName].downloadUrl, projectName).then(function () {
+            // 下载模板后输入模板信息
+            exports.inputProjectInfo();
+        });
     })["catch"](function (err) {
-        console.log("selectFeaturesErr", err);
+        console.error("selectFeaturesErr", err);
     });
 };
 // 选择项目模板
@@ -63,7 +62,7 @@ exports.inquirerFunc = function (customProjectName) {
         templateName = answer.preset;
         selectTemplate(answer.preset);
     })["catch"](function (err) {
-        console.log("inquirerFuncErr", err);
+        console.error("inquirerFuncErr", err);
     });
 };
 // 输入项目信息
@@ -75,6 +74,6 @@ exports.inputProjectInfo = function () {
         // 修改package.json文件
         fs_1.modifyPackageJson(projectName, res);
     })["catch"](function (err) {
-        console.log("inputProjectInfoErr", err);
+        console.error("inputProjectInfoErr", err);
     });
 };

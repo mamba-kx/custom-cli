@@ -1,5 +1,4 @@
 #!/usr/bin/env node
-import ora from "ora";
 import { commanderFunc } from './utils/commander';
 
 commanderFunc()
