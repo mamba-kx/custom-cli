@@ -1,31 +1,13 @@
 import { createApp } from "vue";
 import App from "./App.vue";
 import router from "./router/index";
-import {
-  Tab,
-  Tabs,
-  PullRefresh,
-  Divider,
-  Overlay,
-  Sidebar,
-  SidebarItem,
-  List,
-  Switch,
-  Toast
-} from "vant";
+import { Toast } from "vant";
 
 const app = createApp(App);
 
+console.log("当前为 vue3-" + process.env.VUE_APP_ENV + " 环境");
+
 app.use(router);
+app.use(Toast);
+
 app.mount("#app");
-app
-  .use(Tab)
-  .use(Tabs)
-  .use(PullRefresh)
-  .use(Divider)
-  .use(Overlay)
-  .use(Sidebar)
-  .use(SidebarItem)
-  .use(List)
-  .use(Switch)
-  .use(Toast);
