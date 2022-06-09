@@ -1,4 +1,4 @@
-# vue3-shop
+# vue3-template
 
 ## Project setup
 ```
