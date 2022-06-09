@@ -1,16 +1,21 @@
 <template>
-  <h1>Demo组件</h1>
+  <h1 @click="skipHomePage">Demo组件</h1>
 </template>
 
 <script lang="ts">
 import { defineComponent } from "@vue/composition-api";
 
 export default defineComponent({
-  name: "HelloWorld",
+  name: "Demo",
+  setup(props, { root }) {
+    const skipHomePage = () => {
+      root.$router.push("/");
+    };
+    return {
+      skipHomePage
+    };
+  }
 });
 </script>
 
-<!-- Add "scoped" attribute to limit CSS to this component only -->
-<style scoped>
-
-</style>
+<style scoped></style>

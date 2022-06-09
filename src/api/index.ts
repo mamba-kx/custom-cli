@@ -8,9 +8,9 @@ const $axios = axios.create({
   }
 });
 const api = {
-  // getUserInfo: data => {
-  //   return $axios.post('/', data);
-  // }
+  getUserInfo: (data: any) => {
+    return $axios.post('/', data);
+  },
 };
 
 export default api;

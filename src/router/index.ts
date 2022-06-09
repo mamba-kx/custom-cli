@@ -29,10 +29,12 @@ export const router = new VueRouter({
 
 export const useRouter = () => {
   const vm = getCurrentInstance();
-  return vm?.proxy?.$router;
+  return vm?.proxy.$router;
 };
 
 export const useRoute = () => {
   const vm = getCurrentInstance();
-  return vm?.proxy?.$route;
+  if (vm) {
+    return vm.proxy.$route;
+  }
 };

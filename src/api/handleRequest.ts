@@ -1,27 +1,18 @@
 import { Toast } from "vant";
-import { AxiosInstance } from "axios";
+import api from ".";
 
-interface IOptions {
-  appointCode: Array<number> | ;
-} 
-
-interface IRequestRes {
-  data: {
-    code?: number;
-    message?: string;
-    data?: object;
-  };
-}
+type ValueOf<T> = T[keyof T];
+type TypeAxiosRequest = ReturnType<ValueOf<typeof api>>;
 
 /**
  * @param {promise} axiosRequest:axios请求
  * @param {object} options:其他状态码
  * @returns {promise<[res,err]>} [res,err]
  */
-const handleError = (axiosRequest: any, options: IOptions) => {
+const handleError = (axiosRequest: TypeAxiosRequest, options: any) => {
   const { appointCode = [] } = options ?? {};
   return axiosRequest
-    .then((res: IRequestRes) => {
+    .then((res) => {
       if (res && res?.data?.code === 200) {
         return Promise.resolve([res, null]);
       } else {
