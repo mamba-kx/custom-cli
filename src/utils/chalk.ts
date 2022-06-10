@@ -1,6 +1,6 @@
 const ora = require("ora");
 const chalk = require("chalk");
-const spinner = ora(chalk.yellow("初始化项目模板..."));
+const spinner = ora(chalk.yellow("init template..."));
 
 // loading加载
 export const spinnerStart = () => {
@@ -9,7 +9,7 @@ export const spinnerStart = () => {
 
 // loading加载成功
 export const spinnerSuccess = () => {
-  spinner.text = chalk.green("初始化模板成功");
+  spinner.text = chalk.green("init template succeed!!!");
   spinner.succeed();
 };
 
@@ -24,4 +24,12 @@ export const cliHelp = () => {
   return `Run ${chalk.cyan(
     "ckxcli <command> --help"
   )} for detailed usage of given command`;
+};
+
+export const initSuccess = (projectName: string) => {
+  console.log();
+  console.log("  $  " + chalk.cyan(`cd ${projectName}`));
+  console.log("  $  " + chalk.cyan("npm i"));
+  console.log("  $  " + chalk.cyan("npm run serve"));
+  console.log();
 };

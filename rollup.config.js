@@ -1,5 +1,4 @@
 import commonjs from "rollup-plugin-commonjs";
-// import nodeResolve from "rollup-plugin-node-resolve";
 import hashbang from "rollup-plugin-hashbang";
 import typescript from "@rollup/plugin-typescript";
 import json from "@rollup/plugin-json";
@@ -11,17 +10,6 @@ export default {
     file: "dist/index.js",
     format: "cjs"
   },
-  plugins: [
-    commonjs(),
-    // nodeResolve({
-    //   browser: true,
-    //   extensions: [".js", ".ts"],
-    //   // modulesOnly: true
-    // }),
-    nodeResolve(),
-    hashbang(),
-    typescript(),
-    json()
-  ],
+  plugins: [commonjs(), nodeResolve(), hashbang(), typescript(), json()],
   external: ["ora"]
 };

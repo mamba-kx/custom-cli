@@ -1,22 +1,23 @@
 import { downloadFunc } from "./download";
-import { choices, projectInfo, projectInquirer } from "../config/index";
+import { projectInfo, projectInquirer } from "../config/index";
 import { templates } from "../config/index";
 import { modifyPackageJson } from "./fs";
+import { spinnerStart, initSuccess } from "./chalk";
+
 const inquirer = require("inquirer");
 let projectName: string;
 let templateName: string;
 
 // 选择模板
 const selectTemplate = (value: string) => {
-  if (value === "Vue2H5" || value === "Vue3H5") {
-    selectFeatures("Vant");
-  }
-  if (value === "Vue2Web" || value === "Vue3Web") {
-    selectFeatures("ElementUI");
-  }
+  spinnerStart();
+  downloadFunc(templates[templateName].downloadUrl, projectName).then(() => {
+    // 下载模板后输入模板信息
+    inputProjectInfo();
+  });
 };
 
-// 选择功能
+// 选择功能(后续添加)
 const selectFeatures = (features: string) => {
   return inquirer
     .prompt([
@@ -38,16 +39,12 @@ const selectFeatures = (features: string) => {
       }
     ])
     .then((res: Object) => {
-      // console.log("templateName", templateName);
-      // console.log("projectName", projectName);
-      // console.log("templates", templates);
-      downloadFunc(
-        templates[templateName].downloadUrl,
-        projectName
-      ).then(() => {
-        // 下载模板后输入模板信息
-        inputProjectInfo();
-      });
+      downloadFunc(templates[templateName].downloadUrl, projectName).then(
+        () => {
+          // 下载模板后输入模板信息
+          inputProjectInfo();
+        }
+      );
     })
     .catch((err: any) => {
       console.error("selectFeaturesErr", err);
@@ -59,7 +56,6 @@ export const inquirerFunc = (customProjectName: string) => {
   inquirer
     .prompt(projectInquirer)
     .then((answer: any) => {
-      console.log("inquirerFuncAnswer", answer);
       // 项目名
       projectName = customProjectName;
       // 模板名
@@ -76,7 +72,8 @@ export const inputProjectInfo = () => {
   return inquirer
     .prompt(projectInfo)
     .then((res: any) => {
-      console.log("inputProjectInfoRes", res);
+      res.name = projectName;
+      initSuccess(projectName);
       // 修改package.json文件
       modifyPackageJson(projectName, res);
     })

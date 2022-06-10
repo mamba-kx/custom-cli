@@ -4,23 +4,13 @@
 const templates = {
     Vue2H5: {
         url: "https://github.com/mamba-kx/custom-cli.git",
-        downloadUrl: "http://github.com:mamba-kx/custom-cli#master",
-        description: "vue2-h5模板"
-    },
-    Vue2Web: {
-        url: "https://github.com/mamba-kx/vue-cli2.0-h5.git",
-        downloadUrl: "http://github.com:mamba-kx/vue-cli2.0-h5#master",
-        description: "vue2-web模板"
+        downloadUrl: "github:mamba-kx/custom-cli#vue2_composition_template",
+        description: "vue2_composition模板"
     },
     Vue3H5: {
         url: "https://github.com/mamba-kx/custom-cli.git",
-        downloadUrl: "http://github.com:mamba-kx/custom-cli#master",
-        description: "vue3-h5模板"
-    },
-    Vue3Web: {
-        url: "https://github.com/mamba-kx/vue-cli2.0-h5.git",
-        downloadUrl: "http://github.com:mamba-kx/vue-cli2.0-h5#master",
-        description: "vue3-web模板"
+        downloadUrl: "github:mamba-kx/custom-cli#vue3_composition_template",
+        description: "vue3_composition模板"
     }
 };
 // 模板选项
@@ -29,48 +19,41 @@ const choices = [
         name: "Vue2H5"
     },
     {
-        name: "Vue2Web"
-    },
-    {
         name: "Vue3H5"
-    },
-    {
-        name: "Vue3Web"
     }
 ];
 // 项目信息
 const projectInfo = [
-    // {
-    //   name: "name",
-    //   type: "input",
-    //   message: "projectName"
-    // },
     {
         name: "desc",
         type: "input",
-        message: "projectDesc"
+        message: "description"
     },
     {
         name: "author",
         type: "input",
-        message: "projectAuthor"
+        message: "author"
     }
 ];
 const projectInquirer = [
     {
         name: "preset",
         type: "list",
-        message: "Please pick a preset",
+        message: "Please pick a preset:",
         choices
     }
 ];
 
 const ora = require("ora");
 const chalk = require("chalk");
-const spinner = ora(chalk.yellow("初始化项目模板..."));
+const spinner = ora(chalk.yellow("init template..."));
+// loading加载
+const spinnerStart = () => {
+    spinner.start();
+};
 // loading加载成功
 const spinnerSuccess = () => {
-    spinner.text = chalk.green("初始化模板成功");
+    spinner.text = chalk.green("init template succeed!!!");
     spinner.succeed();
 };
 // loading加载失败
@@ -82,12 +65,18 @@ const spinnerErr = (err) => {
 const cliHelp = () => {
     return `Run ${chalk.cyan("ckxcli <command> --help")} for detailed usage of given command`;
 };
+const initSuccess = (projectName) => {
+    console.log();
+    console.log("  $  " + chalk.cyan(`cd ${projectName}`));
+    console.log("  $  " + chalk.cyan("npm i"));
+    console.log();
+};
 
 const download = require("download-git-repo");
 // 下载模板
 const downloadFunc = (downloadUrl, projectName) => {
     return new Promise((resolve) => {
-        download(downloadUrl, projectName, { clone: true }, function (err) {
+        download(downloadUrl, projectName, function (err) {
             if (err) {
                 return spinnerErr(err);
             }
@@ -105,10 +94,8 @@ const modifyPackageJson = (projectName, answers) => {
     const packagePath = `${projectName}/package.json`;
     // 读取文件
     const packageContent = fs.readFileSync(packagePath, "utf8");
-    console.log("packageContent", packageContent);
     // 编译文件
     const packageResult = handlebars.compile(packageContent)(answers);
-    console.log("packageResult", packageResult);
     // 重新文件
     fs.writeFileSync(packagePath, packageResult);
 };
@@ -118,47 +105,10 @@ let projectName;
 let templateName;
 // 选择模板
 const selectTemplate = (value) => {
-    if (value === "Vue2H5" || value === "Vue3H5") {
-        selectFeatures("Vant");
-    }
-    if (value === "Vue2Web" || value === "Vue3Web") {
-        selectFeatures("ElementUI");
-    }
-};
-// 选择功能
-const selectFeatures = (features) => {
-    return inquirer
-        .prompt([
-        {
-            name: "features",
-            type: "checkbox",
-            message: "Check the features needed for your project:",
-            choices: [
-                {
-                    name: "Router"
-                },
-                {
-                    name: "Vuex"
-                },
-                {
-                    name: features
-                }
-            ]
-        }
-    ])
-        .then((res) => {
-        // console.log("templateName", templateName);
-        // console.log("projectName", projectName);
-        // console.log("templates", templates);
-        downloadFunc(
-        // templates[templateName as keyof typeof templates].downloadUrl,
-        templates[templateName].downloadUrl, projectName).then(() => {
-            // 下载模板后输入模板信息
-            inputProjectInfo();
-        });
-    })
-        .catch((err) => {
-        console.error("selectFeaturesErr", err);
+    spinnerStart();
+    downloadFunc(templates[templateName].downloadUrl, projectName).then(() => {
+        // 下载模板后输入模板信息
+        inputProjectInfo();
     });
 };
 // 选择项目模板
@@ -166,7 +116,6 @@ const inquirerFunc = (customProjectName) => {
     inquirer
         .prompt(projectInquirer)
         .then((answer) => {
-        console.log("inquirerFuncAnswer", answer);
         // 项目名
         projectName = customProjectName;
         // 模板名
@@ -182,7 +131,8 @@ const inputProjectInfo = () => {
     return inquirer
         .prompt(projectInfo)
         .then((res) => {
-        console.log("inputProjectInfoRes", res);
+        res.name = projectName;
+        initSuccess(projectName);
         // 修改package.json文件
         modifyPackageJson(projectName, res);
     })
@@ -202,7 +152,7 @@ const commanderFunc = () => {
     // list
     commander
         .command("list")
-        .description("查看所有可用模板")
+        .description("view all available templates")
         .action(() => {
         templateList();
     });

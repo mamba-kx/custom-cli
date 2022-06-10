@@ -15,11 +15,10 @@ export const commanderFunc = () => {
   // list
   commander
     .command("list")
-    .description("查看所有可用模板")
+    .description("view all available templates")
     .action(() => {
       templateList();
     });
-
   // create
   commander
     .command("create <projectName>")

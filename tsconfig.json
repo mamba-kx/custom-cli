@@ -1,6 +1,6 @@
 {
   "include": ["./src/**/*"],
-  "exclude": ["./src/utils/*"],
+  "exclude": ["./src/features/*"],
   "compilerOptions": {
     "target": "es2015",
     "module": "es2015",
