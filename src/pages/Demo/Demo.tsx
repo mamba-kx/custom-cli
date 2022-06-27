@@ -1,5 +1,5 @@
 import { useNavigate } from 'react-router-dom'
-import './Demo.scss'
+import style from './Demo.module.less'
 interface IProps {
   name: string
 }
@@ -8,7 +8,7 @@ const Demo: React.FC<IProps> = ({ name }) => {
   const navigate = useNavigate()
   return (
     <div
-      className="wrapper"
+      className={style.wrapper}
       onClick={() => {
         navigate('/')
       }}

@@ -1,28 +1,51 @@
 const path = require("path");
 const resolve = (pathUrl) => path.join(__dirname, pathUrl);
+const CracoLessPlugin = require("craco-less");
+const WebpackBar = require("webpackbar");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
 
+// Don't open the browser during development
+process.env.BROWSER = "none";
+
 module.exports = {
+  plugins: [
+    {
+      plugin: CracoLessPlugin,
+      options: {
+        lessLoaderOptions: {
+          lessOptions: {
+            javascriptEnabled: true
+          }
+        }
+      }
+    }
+  ],
+
   webpack: {
     // 配置别名
     alias: {
       "@": resolve("src"),
       "@assets": resolve("src/assets")
     },
+    // plugins: [
+    //   //打包分析
+    //   new BundleAnalyzerPlugin({})
+    // ],
+    // configure: (webpackConfig, { env, paths }) => {
+    //   paths.appBuild = "build";
+    //   webpackConfig.output = {
+    //     ...webpackConfig.output,
+    //     path: path.resolve(__dirname, "build"),
+    //     publicPath: "./"
+    //   };
+    //   return webpackConfig;
+    // }
+
     plugins: [
-      //打包分析
-      // new BundleAnalyzerPlugin({
-      //   analyzerMode: "server",
-      //   analyzerHost: "localhost",
-      //   analyzerPort: 3000,
-      //   reportFilename: "report.html",
-      //   defaultSizes: "parsed",
-      //   openAnalyzer: true,
-      //   generateStatsFile: false,
-      //   statsFilename: "stats.json",
-      //   statsOptions: null,
-      //   logLevel: "info"
-      // }),
+      new WebpackBar({ profile: true }),
+      ...(process.env.REACT_APP_ENV === "test"
+        ? [new BundleAnalyzerPlugin({ openAnalyzer: false })]
+        : [])
     ]
   },
   style: {
