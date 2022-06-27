@@ -1,5 +1,11 @@
 .App {
   text-align: center;
+  width: 750px;
+  background-image: url("@/assets/kobe.jpeg");
+  background-repeat: no-repeat;
+  background-position: center;
+  background-size: contain;
+  height: 600px;
 }
 
 .App-logo {
