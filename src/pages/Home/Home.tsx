@@ -1,5 +1,6 @@
 import { useNavigate } from 'react-router-dom'
 import style from './Home.module.less'
+
 interface IProps {
   name: string
 }
