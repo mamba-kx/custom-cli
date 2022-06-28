@@ -7,6 +7,7 @@ interface IDetailTemplate {
 interface ITemplatesType {
   Vue2H5: IDetailTemplate;
   Vue3H5: IDetailTemplate;
+  ReactCli: IDetailTemplate;
 }
 
 const templates: ITemplatesType = {
@@ -19,6 +20,11 @@ const templates: ITemplatesType = {
     url: "https://github.com/mamba-kx/custom-cli.git",
     downloadUrl: "github:mamba-kx/custom-cli#vue3_composition_template",
     description: "vue3_composition模板"
+  },
+  ReactCli: {
+    url: "https://github.com/mamba-kx/custom-cli.git",
+    downloadUrl: "github:mamba-kx/custom-cli#react_cli_template",
+    description: "react_cli模板"
   }
 };
 
@@ -31,6 +37,9 @@ const choices: {
   },
   {
     name: "Vue3H5"
+  },
+  {
+    name: "ReactCli"
   }
 ];
 

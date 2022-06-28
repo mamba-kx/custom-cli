@@ -11,6 +11,11 @@ const templates = {
         url: "https://github.com/mamba-kx/custom-cli.git",
         downloadUrl: "github:mamba-kx/custom-cli#vue3_composition_template",
         description: "vue3_composition模板"
+    },
+    ReactCli: {
+        url: "https://github.com/mamba-kx/custom-cli.git",
+        downloadUrl: "github:mamba-kx/custom-cli#react_cli_template",
+        description: "react_cli模板"
     }
 };
 // 模板选项
@@ -20,6 +25,9 @@ const choices = [
     },
     {
         name: "Vue3H5"
+    },
+    {
+        name: "ReactCli"
     }
 ];
 // 项目信息
@@ -69,6 +77,7 @@ const initSuccess = (projectName) => {
     console.log();
     console.log("  $  " + chalk.cyan(`cd ${projectName}`));
     console.log("  $  " + chalk.cyan("npm i"));
+    console.log("  $  " + chalk.cyan("npm run serve"));
     console.log();
 };
 
