@@ -8,9 +8,15 @@ interface ITemplatesType {
   Vue2H5: IDetailTemplate;
   Vue3H5: IDetailTemplate;
   ReactCli: IDetailTemplate;
+  egg: IDetailTemplate;
 }
 
 const templates: ITemplatesType = {
+  egg: {
+    url: "https://github.com/mamba-kx/custom-cli.git",
+    downloadUrl: "github:mamba-kx/custom-cli#egg_template",
+    description: "egg模板"
+  },
   Vue2H5: {
     url: "https://github.com/mamba-kx/custom-cli.git",
     downloadUrl: "github:mamba-kx/custom-cli#vue2_composition_template",
@@ -32,6 +38,9 @@ const templates: ITemplatesType = {
 const choices: {
   name: string;
 }[] = [
+  {
+    name: "egg"
+  },
   {
     name: "Vue2H5"
   },
