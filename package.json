@@ -5,11 +5,25 @@
   "scripts": {
     "serve": "vue-cli-service serve",
     "build": "vue-cli-service build",
-    "lint": "vue-cli-service lint"
+    "lint": "vue-cli-service lint",
+    "serve:test": "cross-env VUE_APP_ENV=test vue-cli-service serve",
+    "serve:temp": "cross-env VUE_APP_ENV=temp vue-cli-service serve",
+    "serve:prod": "cross-env VUE_APP_ENV=prod vue-cli-service serve",
+    
+    "build:test": "cross-env VUE_APP_ENV=test vue-cli-service build",
+    "build:temp": "cross-env VUE_APP_ENV=temp vue-cli-service build",
+    "build:prod": "cross-env VUE_APP_ENV=prod vue-cli-service build"
   },
   "dependencies": {
+    "axios": "^0.27.2",
     "core-js": "^3.8.3",
-    "vue": "^2.6.14"
+    "cross-env": "^7.0.3",
+    "sass": "^1.54.8",
+    "sass-loader": "^13.0.2",
+    "vant": "^2.12.48",
+    "vue": "^2.6.14",
+    "vue-router": "^3.5.3",
+    "vuex": "^3.6.2"
   },
   "devDependencies": {
     "@babel/core": "^7.12.16",
@@ -17,9 +31,12 @@
     "@vue/cli-plugin-babel": "~5.0.0",
     "@vue/cli-plugin-eslint": "~5.0.0",
     "@vue/cli-service": "~5.0.0",
+    "babel-plugin-import": "^1.13.5",
     "eslint": "^7.32.0",
     "eslint-plugin-vue": "^8.0.3",
-    "vue-template-compiler": "^2.6.14"
+    "postcss-px-to-viewport": "^1.1.1",
+    "vue-template-compiler": "^2.6.14",
+    "webpack-bundle-analyzer": "^4.6.1"
   },
   "eslintConfig": {
     "root": true,
