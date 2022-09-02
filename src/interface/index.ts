@@ -1,3 +1,4 @@
-interface ITest {}
-
-export { ITest };
+interface IConfig {
+  baseURL: string;
+}
+export { IConfig };

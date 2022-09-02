@@ -15,11 +15,4 @@ export default {
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
 }
-ul,
-li,
-p {
-  margin: 0;
-  padding: 0;
-  list-style: none;
-}
 </style>

@@ -1,6 +1,9 @@
 const { defineConfig } = require("@vue/cli-service");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const CDN_URL = "https://xxx.file.com/";
+const { VantResolver } = require("unplugin-vue-components/resolvers");
+const ComponentsPlugin = require("unplugin-vue-components/webpack");
+
+const CDN_URL = "cdn地址";
 
 module.exports = defineConfig({
   publicPath: process.env.VUE_APP_ENV === "prod" ? CDN_URL : "/",
@@ -9,7 +12,7 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       sass: {
-        additionalData: `@import "./src/style/index.scss";` //注意“;”是必须的，./src/styles/init 的"init"是根据自己创建的文件名称
+        additionalData: `@import "./src/style/mixin.scss";` //注意“;”是必须的，./src/styles/init 的"init"是根据自己创建的文件名称
       }
     }
   },
@@ -47,6 +50,18 @@ module.exports = defineConfig({
           }
         })
         .end();
+    }
+  },
+  configureWebpack: {
+    plugins: [
+      ComponentsPlugin({
+        resolvers: [VantResolver()]
+      })
+    ]
+  },
+  devServer: {
+    open: {
+      target: "http://localhost:8080/?debug=true#/"
     }
   }
 });

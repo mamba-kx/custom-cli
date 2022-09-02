@@ -11,18 +11,16 @@
     "serve:prod": "cross-env VUE_APP_ENV=prod vue-cli-service serve",
     "build:test": "cross-env VUE_APP_ENV=test vue-cli-service build",
     "build:temp": "cross-env VUE_APP_ENV=temp vue-cli-service build",
-    "build:prod": "cross-env VUE_APP_ENV=prod vue-cli-service build",
-    "publish:test": "npm run build:test && charon publish test",
-    "publish:temp": "npm run build:temp && charon publish temp",
-    "publish:prod": "npm run build:prod && charon publish prod"
+    "build:prod": "cross-env VUE_APP_ENV=prod vue-cli-service build"
   },
   "dependencies": {
     "axios": "^0.27.2",
     "clipboard": "^2.0.11",
     "core-js": "^3.8.3",
     "cross-env": "^7.0.3",
-    "html-escaper": "^3.0.3",
-    "vant": "^3.4.9",
+    "normalize.css": "^8.0.1",
+    "pinia": "^2.0.21",
+    "vant": "^3.6.1",
     "vue": "^3.2.13",
     "vue-class-component": "^8.0.0-0",
     "vue-router": "^4.0.15",
@@ -45,7 +43,8 @@
     "postcss-px-to-viewport": "^1.1.1",
     "sass": "^1.51.0",
     "sass-loader": "^12.6.0",
-    "typescript": "~4.5.5"
+    "typescript": "~4.5.5",
+    "unplugin-vue-components": "^0.22.4"
   },
   "eslintConfig": {
     "root": true,
