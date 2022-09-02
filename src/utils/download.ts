@@ -5,9 +5,7 @@ const download = require("download-git-repo");
 export const downloadFunc = (downloadUrl: string, projectName: string) => {
   return new Promise((resolve) => {
     download(downloadUrl, projectName, function (err: any) {
-      if (err) {
-        return spinnerErr(err);
-      }
+      if (err) return spinnerErr(err);
       spinnerSuccess();
       resolve(true);
     });

@@ -1,24 +1,30 @@
 #!/usr/bin/env node
 'use strict';
 
+const url = "https://github.com/mamba-kx/custom-cli.git";
 const templates = {
     egg: {
-        url: "https://github.com/mamba-kx/custom-cli.git",
+        url,
         downloadUrl: "github:mamba-kx/custom-cli#egg_template",
         description: "egg模板"
     },
-    Vue2H5: {
-        url: "https://github.com/mamba-kx/custom-cli.git",
+    vue2: {
+        url,
+        downloadUrl: "github:mamba-kx/custom-cli#vue2_options_template",
+        description: "vue2通用模板"
+    },
+    vuec: {
+        url,
         downloadUrl: "github:mamba-kx/custom-cli#vue2_composition_template",
-        description: "vue2_composition模板"
+        description: "vue2.7 composition模板"
     },
-    Vue3H5: {
-        url: "https://github.com/mamba-kx/custom-cli.git",
+    vue3: {
+        url,
         downloadUrl: "github:mamba-kx/custom-cli#vue3_composition_template",
-        description: "vue3_composition模板"
+        description: "vue3 composition模板"
     },
-    ReactCli: {
-        url: "https://github.com/mamba-kx/custom-cli.git",
+    react: {
+        url,
         downloadUrl: "github:mamba-kx/custom-cli#react_cli_template",
         description: "react_cli模板"
     }
@@ -29,13 +35,16 @@ const choices = [
         name: "egg"
     },
     {
-        name: "Vue2H5"
+        name: "vue2"
     },
     {
-        name: "Vue3H5"
+        name: "vuec"
     },
     {
-        name: "ReactCli"
+        name: "vue3"
+    },
+    {
+        name: "react"
     }
 ];
 // 项目信息
@@ -94,9 +103,8 @@ const download = require("download-git-repo");
 const downloadFunc = (downloadUrl, projectName) => {
     return new Promise((resolve) => {
         download(downloadUrl, projectName, function (err) {
-            if (err) {
+            if (err)
                 return spinnerErr(err);
-            }
             spinnerSuccess();
             resolve(true);
         });
@@ -119,11 +127,10 @@ const modifyPackageJson = (projectName, answers) => {
 
 const inquirer = require("inquirer");
 let projectName;
-let templateName;
 // 选择模板
 const selectTemplate = (value) => {
     spinnerStart();
-    downloadFunc(templates[templateName].downloadUrl, projectName).then(() => {
+    downloadFunc(templates[value].downloadUrl, projectName).then(() => {
         // 下载模板后输入模板信息
         inputProjectInfo();
     });
@@ -135,8 +142,6 @@ const inquirerFunc = (customProjectName) => {
         .then((answer) => {
         // 项目名
         projectName = customProjectName;
-        // 模板名
-        templateName = answer.preset;
         selectTemplate(answer.preset);
     })
         .catch((err) => {
@@ -191,13 +196,3 @@ const commanderFunc = () => {
 };
 
 commanderFunc();
-// const commander = require("commander");
-// const chalk = require("chalk");
-// const download = require("download-git-repo");
-// const handlebars = require("handlebars");
-// const fs = require("fs");
-// const inquirer = require("inquirer");
-// const spinner = ora(chalk.yellow("初始化项目模板..."));
-// const program = new Command();
-// program.version("0.1.0");
-// console.log("1111", chalk.green("test"));

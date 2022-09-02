@@ -1,11 +1,12 @@
 {
   "name": "ckxcli",
-  "version": "1.2.1",
+  "version": "1.4.1",
   "description": "脚手架工具",
   "main": "index.js",
   "type": "commonjs",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "serve": "rollup -c"
   },
   "bin": {
     "ckxcli": "dist/index.js"

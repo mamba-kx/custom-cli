@@ -5,30 +5,38 @@ interface IDetailTemplate {
   description: string;
 }
 interface ITemplatesType {
-  Vue2H5: IDetailTemplate;
-  Vue3H5: IDetailTemplate;
-  ReactCli: IDetailTemplate;
+  vue2: IDetailTemplate;
+  vuec: IDetailTemplate;
+  vue3: IDetailTemplate;
+  react: IDetailTemplate;
   egg: IDetailTemplate;
 }
 
+const url = "https://github.com/mamba-kx/custom-cli.git";
+
 const templates: ITemplatesType = {
   egg: {
-    url: "https://github.com/mamba-kx/custom-cli.git",
+    url,
     downloadUrl: "github:mamba-kx/custom-cli#egg_template",
     description: "egg模板"
   },
-  Vue2H5: {
-    url: "https://github.com/mamba-kx/custom-cli.git",
+  vue2: {
+    url,
+    downloadUrl: "github:mamba-kx/custom-cli#vue2_options_template",
+    description: "vue2通用模板"
+  },
+  vuec: {
+    url,
     downloadUrl: "github:mamba-kx/custom-cli#vue2_composition_template",
-    description: "vue2_composition模板"
+    description: "vue2.7 composition模板"
   },
-  Vue3H5: {
-    url: "https://github.com/mamba-kx/custom-cli.git",
+  vue3: {
+    url,
     downloadUrl: "github:mamba-kx/custom-cli#vue3_composition_template",
-    description: "vue3_composition模板"
+    description: "vue3 composition模板"
   },
-  ReactCli: {
-    url: "https://github.com/mamba-kx/custom-cli.git",
+  react: {
+    url,
     downloadUrl: "github:mamba-kx/custom-cli#react_cli_template",
     description: "react_cli模板"
   }
@@ -42,13 +50,16 @@ const choices: {
     name: "egg"
   },
   {
-    name: "Vue2H5"
+    name: "vue2"
   },
   {
-    name: "Vue3H5"
+    name: "vuec"
   },
   {
-    name: "ReactCli"
+    name: "vue3"
+  },
+  {
+    name: "react"
   }
 ];
 

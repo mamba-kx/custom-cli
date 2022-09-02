@@ -11,7 +11,7 @@ let templateName: string;
 // 选择模板
 const selectTemplate = (value: string) => {
   spinnerStart();
-  downloadFunc(templates[templateName].downloadUrl, projectName).then(() => {
+  downloadFunc(templates[value].downloadUrl, projectName).then(() => {
     // 下载模板后输入模板信息
     inputProjectInfo();
   });
