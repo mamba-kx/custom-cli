@@ -1,11 +1,11 @@
 const { defineConfig } = require("@vue/cli-service");
 const { BundleAnalyzerPlugin } = require("webpack-bundle-analyzer");
-const CDN_URL = "https://xxx.file.com/";
+const CDN_URL = `cdn地址`;
 
 module.exports = defineConfig({
-  publicPath: process.env.VUE_APP_ENV === "prod" ? CDN_URL : "/",
+  publicPath: process.env.VUE_APP_ENV === "prod" ? CDN_URL : "./",
   productionSourceMap: false,
-  lintOnSave: false,
+  lintOnSave: "warning",
   css: {
     loaderOptions: {
       sass: {
@@ -15,7 +15,6 @@ module.exports = defineConfig({
   },
 
   chainWebpack: (config) => {
-    // 生产环境
     if (process.env.VUE_APP_ENV === "prod") {
       config
         .plugin("webpack-report")
@@ -47,6 +46,11 @@ module.exports = defineConfig({
           }
         })
         .end();
+    }
+  },
+  devServer: {
+    open: {
+      target: "http://localhost:8080/?debug=true#/"
     }
   }
 });

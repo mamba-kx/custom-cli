@@ -1,18 +1,39 @@
-import Vue from "vue";
-import VueRouter, { Route } from "vue-router";
-import { getCurrentInstance } from "@vue/composition-api";
+import Vue, { getCurrentInstance } from "vue";
+import VueRouter from "vue-router";
+
 Vue.use(VueRouter);
+
+const originalPush = VueRouter.prototype.push;
+const originalReplace = VueRouter.prototype.replace;
+
+// @ts-ignore
+VueRouter.prototype.push = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) {
+    return originalPush.call(this, location, onResolve, onReject);
+  }
+  // @ts-ignore
+  return originalPush.call(this, location).catch((err: any) => err);
+};
+
+// @ts-ignore
+VueRouter.prototype.replace = function push(location, onResolve, onReject) {
+  if (onResolve || onReject) {
+    return originalReplace.call(this, location, onResolve, onReject);
+  }
+  // @ts-ignore
+  return originalReplace.call(this, location).catch((err: any) => err);
+};
 
 const routes = [
   {
     path: "/",
     name: "Home",
-    component: () => import("@/views/Home.vue")
+    component: () => import("@/views/Home/Home.vue")
   },
   {
     path: "/Demo",
     name: "Demo",
-    component: () => import("@/views/Demo.vue")
+    component: () => import("@/views/Demo/Demo.vue")
   }
 ];
 
@@ -28,8 +49,8 @@ export const router = new VueRouter({
 });
 
 export const useRouter = () => {
-  const vm = getCurrentInstance();
-  return vm?.proxy.$router;
+  const vm: any = getCurrentInstance();
+  return vm.proxy.$router;
 };
 
 export const useRoute = () => {

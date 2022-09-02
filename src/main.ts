@@ -1,14 +1,12 @@
 import Vue from "vue";
 import App from "./App.vue";
 import { router } from "./router/index";
-import VueCompositionAPI from "@vue/composition-api";
-import { Toast } from "vant";
+import config from "@/config/env";
+import "normalize.css";
+import "@/style/vant";
 
-Vue.use(Toast);
-Vue.use(VueCompositionAPI);
 Vue.config.productionTip = false;
-
-console.log("当前为 vue2-composition" + process.env.VUE_APP_ENV + " 环境");
+console.log(`${process.env.VUE_APP_ENV}环境-配置信息`, config);
 
 new Vue({
   router,
