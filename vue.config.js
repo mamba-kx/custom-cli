@@ -9,7 +9,7 @@ module.exports = defineConfig({
   css: {
     loaderOptions: {
       sass: {
-        additionalData: `@import "./src/style/index.scss";` //注意“;”是必须的，./src/styles/init 的"init"是根据自己创建的文件名称
+        additionalData: `@import "./src/style/mixin.scss";` //注意“;”是必须的，./src/styles/init 的"init"是根据自己创建的文件名称
       }
     }
   },
