@@ -1,7 +1,6 @@
 <template>
   <div class="home">
     <van-button type="info" block @click="toDemo">首页按钮</van-button>
-    {{ url }}
   </div>
 </template>
 
@@ -9,12 +8,10 @@
 export default {
   components: {},
   data() {
-    return {
-      url: window.$CONFIG.baseUrl
-    };
+    return {};
   },
-  created() {},
-  mounted() {},
+  created() { },
+  mounted() { },
   methods: {
     toDemo() {
       this.$router.push('/demo');
@@ -26,4 +23,10 @@ export default {
 </script>
 
 <style lang='scss' scoped>
+.home {
+  width: 100vw;
+  height: $height;
+  background: skyblue;
+  @include top;
+}
 </style>
