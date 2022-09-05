@@ -2,6 +2,7 @@ import Vue from "vue";
 import App from "./App.vue";
 import { router } from "@/router/index";
 import "@/style/vant";
+import 'normalize.css'
 import config from "@/config/env";
 
 console.log(`${process.env.VUE_APP_ENV}环境-配置信息`, config);
