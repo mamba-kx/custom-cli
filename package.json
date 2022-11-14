@@ -7,7 +7,7 @@
     "dev": "vite",
     "build": "vue-tsc && vite build",
     "preview": "vite preview",
-    "commit":"git-cz",
+    "commit": "git-cz",
     "prettier": "prettier --write",
     "eslint": "eslint --ext .js,.vue --ignore-path .gitignore --fix src",
     "serve:test": "cross-env VUE_APP_ENV=test vite",
@@ -19,7 +19,7 @@
   },
   "config": {
     "commitizen": {
-      "path": "node_modules/cz-customizable"
+      "path": "node_modules/cz-conventional-changelog"
     }
   },
   "dependencies": {
@@ -42,9 +42,7 @@
     "@typescript-eslint/parser": "^5.42.1",
     "@vitejs/plugin-vue": "^3.2.0",
     "commitizen": "^4.2.5",
-    "commitlint-config-cz": "^0.13.3",
     "cz-conventional-changelog": "^3.3.0",
-    "cz-customizable": "^7.0.0",
     "eslint": "^8.27.0",
     "eslint-config-prettier": "^8.5.0",
     "eslint-plugin-prettier": "^4.2.1",
