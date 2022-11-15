@@ -1,3 +1,6 @@
-node_modules/
-dist/
-index.html
+
+.prettierrc
+!commitlint.config.js
+.babel.config.js
+!.umirc.ts
+ 

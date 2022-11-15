@@ -3,11 +3,11 @@
 </template>
 
 <script lang="ts" setup>
-import { useRouter } from "vue-router";
-const router = useRouter();
+import { useRouter } from 'vue-router'
+const router = useRouter()
 const skipToHome = () => {
-  router.push("/");
-};
+  router.push('/')
+}
 </script>
 
 <style lang="scss" scoped></style>
