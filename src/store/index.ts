@@ -1,28 +1,28 @@
-import { defineStore } from "pinia";
-import handleError from "@/api/handleRequest";
-import api from "@/api/index";
+import { defineStore } from 'pinia'
+import handleError from '@/api/handleRequest'
+import api from '@/api/index'
 
-export const useStore = defineStore("storeID", {
+export const useStore = defineStore('storeID', {
   state: () => ({
-    info: ""
+    info: ''
   }),
 
   getters: {
     reverseInfo(): string {
-      return (this.info = "world");
+      return (this.info = 'world')
     }
   },
 
   actions: {
     async getInfo() {
-      const [res, err] = await handleError(api.getUserInfo({}));
+      const [res, err] = await handleError(api.getUserInfo({}))
       if (!err) {
-        return (this.info = res.data);
+        return (this.info = res.data)
       }
-      console.error(err);
+      console.error(err)
     },
     setInfo() {
-      this.info = this.info.toUpperCase();
+      this.info = this.info.toUpperCase()
     }
   }
-});
+})
