@@ -16,12 +16,17 @@ const templates = {
     vuec: {
         url,
         downloadUrl: "github:mamba-kx/custom-cli#vue2_composition_template",
-        description: "vue2.7 composition模板"
+        description: "vue2.7 composition"
     },
     vue3: {
         url,
         downloadUrl: "github:mamba-kx/custom-cli#vue3_composition_template",
-        description: "vue3 composition模板"
+        description: "vue3 + typescript"
+    },
+    vvue3: {
+        url,
+        downloadUrl: "github:mamba-kx/custom-cli#vvue3_composition_template",
+        description: "vite + vue3 + typescript"
     },
     react: {
         url,
@@ -42,6 +47,9 @@ const choices = [
     },
     {
         name: "vue3"
+    },
+    {
+        name: "vvue3"
     },
     {
         name: "react"
